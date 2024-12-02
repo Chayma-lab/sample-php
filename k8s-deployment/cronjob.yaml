@@ -1,0 +1,16 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: print-message-cronjob
+  namespace: my-app-namespace
+spec:
+  schedule: "*/5 * * * *"  # Deze taak draait elke 5 minuten
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: print-message
+            image: busybox
+            command: ["echo", "Hello from Kubernetes CronJob!"]
+          restartPolicy: OnFailure
